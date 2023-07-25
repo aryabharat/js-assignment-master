@@ -35,6 +35,7 @@ create table if not exists mydb.matches
     foreign key (tourId) references tours(id)
 );
 
+
 -- seed data
 insert ignore into mydb.sports (id, name) values (1, 'Cricket');
 insert ignore into mydb.sports (id, name) values (2, 'Football');
@@ -55,3 +56,28 @@ insert ignore into mydb.matches (name, tourId, format, startTime, endTime) value
 insert ignore into mydb.matches (name, tourId, format, startTime, endTime) values ('IND vs WI', 3, 'ODI', '2023-06-12 10:00:00', '2023-06-12 23:00:00');
 insert ignore into mydb.matches (name, tourId, format, startTime, endTime) values ('IND vs WI', 3, 'ODI', '2023-06-14 10:00:00', '2023-06-14 23:00:00');
 insert ignore into mydb.matches (name, tourId, format, startTime, endTime) values ('KER vs JFC', 4, 'soccer', '2022-04-09 18:00:00', '2022-04-09 23:00:00');
+
+
+
+create table if not exists mydb.news
+(
+    id int auto_increment not null primary key,
+    title varchar(100) not null,
+    tourId int,
+    sportId int,
+    matchId int,
+    description varchar(3000) not null,
+    recUpdatedAt timestamp not null default current_timestamp on update current_timestamp,
+    createdAt timestamp not null default current_timestamp,
+    foreign key (sportId) references sports(id),
+    foreign key (matchId) references matches(id)
+    foreign key (tourId) references tours(id)
+);
+
+-- we should make query on tour_id as tour id is PK
+CREATE UNIQUE INDEX unique_tourName ON tours (name);
+CREATE INDEX sparse_tourId ON news (tourId);
+CREATE INDEX sparse_sportId ON news (sportId);
+CREATE INDEX sparse_matchId ON news (matchId);
+
+
