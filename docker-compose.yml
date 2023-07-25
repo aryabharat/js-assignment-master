@@ -25,6 +25,12 @@ services:
       - NODE_ENV=development
     networks:
       - my-network
+  redis:  # New Redis service block
+    image: redis:6.2.5  # Use a specific version, not "latest"
+    ports:
+      - 6379:6379  # Expose Redis port on the host
+    networks:
+      - my-network
 
 networks:
   my-network:
