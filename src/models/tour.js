@@ -15,7 +15,8 @@ const getTourById = async (id) => {
 const getMatchesByTourName = async (name, limit, offset) => {
   /**
    *  - This is assuming that a tour will likely to have more then 1k matches in general
-   * - We can use ORM instead of raw query
+   * - We can use ORM instead of raw query or Knex.js query builder
+   * 
    */
   const statement = `
     SELECT * FROM
