@@ -23,7 +23,7 @@ describe("News API Tests", () => {
   };
 
   const testGetRequest = async (endpoint, id, query, statusCode) => {
-    const response = await request(app)
+    const response = await request(server)
       .get(endpoint)
       .query(query)
       .expect(statusCode);
@@ -36,7 +36,7 @@ describe("News API Tests", () => {
   };
 
   it("should post news successfully", async () => {
-    const response = await request(app)
+    const response = await request(server)
       .post("/news")
       .send({ ...testData.newsData, matchId: testData.matchId })
       .expect(201);
@@ -72,7 +72,7 @@ describe("News API Tests", () => {
   });
 
   it("should return 400 Bad Request if POST /news has invalid body", async () => {
-    const response = await request(app).post("/news").send({});
+    const response = await request(server).post("/news").send({});
     expect(response.status).toBe(400);
   });
 
