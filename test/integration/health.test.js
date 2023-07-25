@@ -1,5 +1,5 @@
 const request = require('supertest');
-const { app } = require('../../index');
+const app  = require('../../index');
 
 describe('Integration Tests', () => {
   let server;
@@ -13,7 +13,8 @@ describe('Integration Tests', () => {
   });
 
   it('should return a 200 OK status code for GET request to /health', async () => {
-    const response = await request(server).get('/health');
+    const response = await request(app).get('/health');
     expect(response.status).toBe(200);
   });
 });
+
