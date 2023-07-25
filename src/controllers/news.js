@@ -68,7 +68,7 @@ const getNewsByCriteria = async (criteria, params, query) => {
   };
 };
 
-// Usage examples:
+
 const byMatchId = async (params, query) => {
   return getNewsByCriteria("match", params, query);
 };
