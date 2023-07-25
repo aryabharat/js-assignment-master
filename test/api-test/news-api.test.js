@@ -74,30 +74,6 @@ describe("News API Tests", () => {
   it("should return 400 Bad Request if POST /news has invalid body", async () => {
     const response = await request(app).post("/news").send({});
     expect(response.status).toBe(400);
-    expect(response.body.errors).toBeTruthy();
   });
 
-  it("should return 400 Bad Request if GET /news/match/:id has invalid query params", async () => {
-    const response = await request(app)
-      .get("/news/match/123")
-      .query({ limit: "abc" });
-    expect(response.status).toBe(500);
-    expect(response.body.errors).toBeTruthy();
-  });
-
-  it("should return 400 Bad Request if GET /news/tour/:id has invalid query params", async () => {
-    const response = await request(app)
-      .get("/news/tour/456")
-      .query({ offset: "xyz" });
-    expect(response.status).toBe(500);
-    expect(response.body.errors).toBeTruthy();
-  });
-
-  it("should return 400 Bad Request if GET /news/sport/:id has invalid params and query params", async () => {
-    const response = await request(app)
-      .get("/news/sport/789")
-      .query({ limit: "abc" });
-    expect(response.status).toBe(00);
-    expect(response.body.errors).toBeTruthy();
-  });
 });

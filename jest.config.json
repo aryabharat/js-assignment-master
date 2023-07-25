@@ -1,0 +1,7 @@
+{"moduleDirectories": [
+    "node_modules",
+    "src"
+],
+"verbose": true,
+"rootDir": "."
+}

@@ -10,7 +10,7 @@ const postNewsBodyValidator = () => {
   return [
     body("title").isString().trim(),
     body("description").isString().trim(),
-    oneOf([body("matchId").isInt(), body("tourId").isInt()], {
+    oneOf([body("matchId").isInt({ min: 0 }), body("tourId").isInt({ min: 0 })], {
       message: "matchId or tourId is missing",
     }),
   ];
@@ -20,16 +20,16 @@ const getNewsQueryValidator = () => {
   return [
     query("limit").optional(),
     query("offset").optional(),
-    param("id").isInt(),
+    param("id").isInt({ min: 0 }),
   ];
 };
 
 const validateReq = (req, res, next) => {
-  const result = validationResult(req);
-  if (result.isEmpty()) {
+  const error = validationResult(req, {strictParams: ['body']});
+  if (error.isEmpty()) {
     next();
   } else {
-    res.status(400).send({ errors: result.array() });
+    res.status(400).send({ errors: error.array() });
   }
 };
 
